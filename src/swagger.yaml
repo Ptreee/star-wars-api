@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Star-Wars-filter-API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://ptreee-star-wars-api.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /films:
+    get:
+      tags:
+        - Films
+      summary: get Films
+      operationId: getFilms
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /favorites:
+    post:
+      tags:
+        - Favorites
+      summary: createFavorites
+      operationId: createFavorites
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createFavoritesRequest'
+            example:
+              list_name: just2
+              movie_id: '2'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    get:
+      tags:
+        - Favorites
+      summary: getAllFavorites
+      operationId: getAllFavorites
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getAllFavorites'
+            example:
+              list_name: ''
+              page: 1
+              pageSize: 10
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /favorites/1:
+    get:
+      tags:
+        - Favorites
+      summary: getSingleFavorite
+      operationId: getSingleFavorite
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /favorites/1/file:
+    get:
+      tags:
+        - Favorites
+      summary: getSingleFavoriteFile
+      operationId: getSingleFavoriteFile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    createFavoritesRequest:
+      title: createFavoritesRequest
+      required:
+        - list_name
+        - movie_id
+      type: object
+      properties:
+        list_name:
+          type: string
+        movie_id:
+          type: string
+      example:
+        list_name: just2
+        movie_id: '2'
+    getAllFavorites:
+      title: getAllFavorites
+      required:
+        - list_name
+        - page
+        - pageSize
+      type: object
+      properties:
+        list_name:
+          type: string
+        page:
+          type: number
+        pageSize:
+          type: number
+      example:
+        list_name: ''
+        page: 1
+        pageSize: 10
+tags:
+  - name: Films
+  - name: Favorites
