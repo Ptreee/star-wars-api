@@ -2,6 +2,7 @@ require('express-async-errors');
 import * as dotenv from 'dotenv';
 import express from 'express';
 import sequelize from './db/connect';
+import { Request, Response } from 'express';
 // [extra security]
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -16,7 +17,9 @@ import favoritesRouter from './routes/favorites.routes';
 import notFound from './middleware/not-found';
 import errorHandlerMiddleware from './middleware/error-handler';
 // [docs]
-
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -28,6 +31,11 @@ app.use(
     max: 100,
   }),
 );
+// [routes] utility
+app.get('/', (req: Request, res: Response) => {
+  res.send('<h1>StarWars API v.1.0</h1><a href="/api-docs">Documentation</a>');
+});
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // [routes] API
 app.use('/api/v1/films', filmsRouter);

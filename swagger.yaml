@@ -49,24 +49,13 @@ paths:
       summary: getAllFavorites
       operationId: getAllFavorites
       parameters: []
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getAllFavorites'
-            example:
-              list_name: ''
-              page: 1
-              pageSize: 10
-        required: true
       responses:
         '200':
           description: ''
           headers: {}
       deprecated: false
       security: []
-  /favorites/1:
+  /favorites/:id:
     get:
       tags:
         - Favorites
@@ -79,7 +68,7 @@ paths:
           headers: {}
       deprecated: false
       security: []
-  /favorites/1/file:
+  /favorites/:id/file:
     get:
       tags:
         - Favorites
